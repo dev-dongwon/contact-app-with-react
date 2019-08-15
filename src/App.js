@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PhoneForm from './components/PhoneForm';
 
-function App() {
-  return (
-    <div>
-      <PhoneForm/>
-    </div>
-  );
+
+class App extends Component {
+
+  id = 0;
+
+
+  state = {
+    information: [],
+  }
+
+  handleCreate = (data) => {
+    const { information } = this.state;
+    this.setState({
+      information: [...information, {...data, id : this.id++}]
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <PhoneForm onCreate={this.handleCreate}/>
+        {JSON.stringify(this.state.information)}
+      </div>
+    );
+  }
 }
 
 export default App;
